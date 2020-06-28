@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<!-- 2018.04.18 Ayumi Shibamoto -->
+<!-- 2020.06.28 Copied & modified by Koji Yamada -->
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    
+    <link   type="text/css" rel="stylesheet" href="https://unpkg.com/openlayers@latest/dist/ol.css">
+    <script type="text/javascript"            src="https://unpkg.com/openlayers@latest/dist/ol.js"></script>
+    <script type="text/javascript"            src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.4.4/proj4.js"></script>
+    <style type="text/css">
+      html {height:100%;}
+      body {height:100%; margin:0;}
+      #map {height:100%;}
+    </style>
+    
+    <title>正距方位図法で成田からパリ</title>
+  </head>
+  <body>
+    <div id="map"></div>
+  </body>
+  <script type="text/javascript">
+    proj4.defs("EPSG:32650", "+proj=utm +zone=50 +ellps=WGS84 +datum=WGS84 +units=m +no_defs");
+    proj4.defs("EPSG:32651", "+proj=utm +zone=51 +ellps=WGS84 +datum=WGS84 +units=m +no_defs");
+    proj4.defs("EPSG:32652", "+proj=utm +zone=52 +ellps=WGS84 +datum=WGS84 +units=m +no_defs");
+    proj4.defs("EPSG:32653", "+proj=utm +zone=53 +ellps=WGS84 +datum=WGS84 +units=m +no_defs");
+    proj4.defs("EPSG:32654", "+proj=utm +zone=54 +ellps=WGS84 +datum=WGS84 +units=m +no_defs");
+    proj4.defs("EPSG:32655", "+proj=utm +zone=55 +ellps=WGS84 +datum=WGS84 +units=m +no_defs");
+    proj4.defs("EPSG:32656", "+proj=utm +zone=56 +ellps=WGS84 +datum=WGS84 +units=m +no_defs");
+    proj4.defs("EPSG:32657", "+proj=utm +zone=57 +ellps=WGS84 +datum=WGS84 +units=m +no_defs");
+    proj4.defs("EPSG:32658", "+proj=utm +zone=58 +ellps=WGS84 +datum=WGS84 +units=m +no_defs");
+    proj4.defs("EPSG:32659", "+proj=utm +zone=59 +ellps=WGS84 +datum=WGS84 +units=m +no_defs");
+    proj4.defs("ランベルト正角円錐図法", "+proj=lcc +lat_1=34.08 +lat_2=37.92 +lat_0=0 +lon_0=138.4 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs");
+    proj4.defs("正距方位図法"          , "+proj=aeqd +lat_0=35.771952 +lon_0=140.384974 +x_0=0 +y_0=0 +a=6378137 +b=6378137 +datum=WGS84 +units=m +no_defs");
+    ol.proj.get('正距方位図法').setExtent([-141e5, -141e5, 141e5, 141e5]);
+    
+    const map = new ol.Map({
+        "target":"map"
+      , "controls": ol.control.defaults({"attributionOptions":{"collapsible": false}}).extend([new ol.control.ScaleLine()])
+      , "layers":[new ol.layer.Tile({"source":new ol.source.XYZ({"url":"https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png", "attributions":[new ol.Attribution({"html":"<a href='http://www.gsi.go.jp/kikakuchousei/kikakuchousei40182.html'>出典:国土地理院ウェブサイト</a>"})]})})]
+      , "view"  :new ol.View({"center": ol.proj.transform([139.043269,37.911997 + 0.186], "EPSG:4326", "正距方位図法"), "zoom":16, "projection":"正距方位図法"})
+    });
+    
+    const l = new ol.layer.Vector({
+        "source": new ol.source.Vector({
+            "features": [
+                new ol.Feature({
+                      "name": "AirLine"
+                    , "geometry": new ol.geom.LineString([ol.proj.transform([140.384974, 35.771952 + 0.1835], "EPSG:4326", "正距方位図法"),ol.proj.transform([2.54171,49.0123], "EPSG:4326", "正距方位図法")])
+                })
+            ]
+        })
+    });
+    
+    map.addLayer(l);
+  </script>
+</html>
