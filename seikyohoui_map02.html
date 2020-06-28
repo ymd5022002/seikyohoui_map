@@ -17,7 +17,7 @@
       #map {height:100%;}
     </style>
     
-    <title>正距方位図法でペヤングからパリ</title>
+    <title>正距方位図法でペヤングからヌル島</title>
   </head>
   <body>
     <div id="map"></div>
@@ -49,7 +49,7 @@
             "features": [
                 new ol.Feature({
                       "name": "AirLine"
-                    , "geometry": new ol.geom.LineString([ol.proj.transform([139.173632, 36.286557 + 0.1835], "EPSG:4326", "正距方位図法"),ol.proj.transform([2.54171,49.0123], "EPSG:4326", "正距方位図法")])
+                    , "geometry": new ol.geom.LineString([ol.proj.transform([139.173632, 36.286557 + 0.1835], "EPSG:4326", "正距方位図法"),ol.proj.transform([0,0], "EPSG:4326", "正距方位図法")])
                 })
             ]
         })
