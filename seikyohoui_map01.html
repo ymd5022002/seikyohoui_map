@@ -41,7 +41,7 @@
         "target":"map"
       , "controls": ol.control.defaults({"attributionOptions":{"collapsible": false}}).extend([new ol.control.ScaleLine()])
       , "layers":[new ol.layer.Tile({"source":new ol.source.XYZ({"url":"https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png", "attributions":[new ol.Attribution({"html":"<a href='http://www.gsi.go.jp/kikakuchousei/kikakuchousei40182.html'>出典:国土地理院ウェブサイト</a>"})]})})]
-      , "view"  :new ol.View({"center": ol.proj.transform([139.043269,37.911997 + 0.186], "EPSG:4326", "正距方位図法"), "zoom":16, "projection":"正距方位図法"})
+      , "view"  :new ol.View({"center": ol.proj.transform([139.173632,36.286557 + 0.186], "EPSG:4326", "正距方位図法"), "zoom":16, "projection":"正距方位図法"})
     });
     
     const l = new ol.layer.Vector({
